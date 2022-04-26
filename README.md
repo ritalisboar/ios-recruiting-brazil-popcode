@@ -1,4 +1,4 @@
-# Concrete iOS Recruit Challenge
+# Popcode iOS Recruit Challenge
 
 ---
 
@@ -8,7 +8,7 @@
 
 ---
 
-Obrigado por participar do desafio iOS da Concrete! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
+Obrigado por participar do desafio iOS da Popcode! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
 
 ## Afinal, o que é esse desafio?
 
