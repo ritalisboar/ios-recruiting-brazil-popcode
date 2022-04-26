@@ -1,8 +1,6 @@
 # Popcode iOS Recruit Challenge
 
----
 
-![Gif](assets/Logo-animado-1.gif)
 
 ## Bem vindo
 
