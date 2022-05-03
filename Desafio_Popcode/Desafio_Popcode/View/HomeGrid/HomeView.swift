@@ -13,13 +13,12 @@ class HomeView: UICollectionReusableView {
         super.init(frame: frame)
         addSubviews()
         constraintsBackgroundImage()
-        constraintsTopButton()
-        constraintsTopButton()
         constraintsTopTitle()
         constraintsTopText()
         constraintsSearchBar()
-        
+        constraintsFilterButton()
     }
+    
     //     MARK: - backgroundTop
         private lazy var backgroundImage: UIImageView = {
             let imageBack = UIImageView()
@@ -37,20 +36,21 @@ class HomeView: UICollectionReusableView {
             backgroundImage.heightAnchor.constraint(equalToConstant: 289).isActive = true
         }
     
-    //     MARK: - topButton
-        private lazy var topButton: UIButton = {
-            let topButton = UIButton()
-//            topButton.image = UIImage(named: "menuNavBar")
-            topButton.contentMode = .scaleAspectFill
-            topButton.translatesAutoresizingMaskIntoConstraints = false
-            return topButton
+    //     MARK: - filterButton
+         lazy var filterButton: UIButton = {
+            let filterButton = UIButton()
+            filterButton.setImage(UIImage(named: "menuNavBar"), for: .normal)
+             filterButton.tag = 1
+            filterButton.translatesAutoresizingMaskIntoConstraints = false
+            return filterButton
         }()
         
-        private func constraintsTopButton() {
-            topButton.topAnchor.constraint(equalTo: topAnchor, constant: 23).isActive = true
-            topButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 27).isActive = true
+        private func constraintsFilterButton() {
+            filterButton.topAnchor.constraint(equalTo: topAnchor, constant: 48).isActive = true
+            filterButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22).isActive = true
+            filterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            filterButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         }
-    
     
     //     MARK: - topTitle
         private lazy var topTitle: UILabel = {
@@ -111,11 +111,10 @@ class HomeView: UICollectionReusableView {
 
     private func addSubviews(){
         addSubview(backgroundImage)
-        addSubview(topButton)
-        addSubview(topButton)
         addSubview(topTitle)
         addSubview(topText)
         addSubview(searchBar)
+        addSubview(filterButton)
     }
 
 }

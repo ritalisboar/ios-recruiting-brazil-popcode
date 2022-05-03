@@ -9,13 +9,18 @@ import UIKit
 
 class DetailsViewController: UIViewController {
 
+    private var customView: DetailsView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        buildDetailsView()
         // Do any additional setup after loading the view.
     }
     
-
+    private func buildDetailsView() {
+        view = DetailsView()
+        customView = view as? DetailsView
+    }
     /*
     // MARK: - Navigation
 

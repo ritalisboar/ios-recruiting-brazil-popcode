@@ -9,25 +9,38 @@ import UIKit
 
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
+    private var customHomeView: HomeView? = nil
     let cellId = "cellId"
     let headerId = "headerId"
     let padding: CGFloat = 30
+    var getMovies = MovieParamsPresenter()
+    let movieCVC = MovieCollectionViewCell()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getMovies.getMovies()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             let padding: CGFloat = 30
             layout.sectionInset = .init(top: padding, left: padding, bottom: padding, right: padding)
             layout.minimumLineSpacing = 30
         }
         
+        customHomeView?.filterButton.addAction(UIAction { [weak self] _ in
+            self?.filterButton()
+        }, for: .touchUpInside)
+        
         collectionView?.backgroundColor = UIColor(named: "backgroundColor")
         collectionView?.contentInsetAdjustmentBehavior = .never
         collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier:  cellId)
         collectionView?.register(HomeView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-//        filterButton()
+    }
+    
+    private func buildView() {
+        view = HomeView()
+        customHomeView = view as? HomeView
+
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -40,14 +53,22 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 13
+        let cellsNumber = getMovies.movies.map({ $0.title})
+        return 20
     }
     
-    
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MovieCollectionViewCell
+        let title = getMovies.movies.map({ $0.title })
+        if title.count > 0 {
+            cell.movieTitle.text = title[indexPath.row]
+        }
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let details = DetailsViewController()
+        details.navigationController?.pushViewController(details, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -57,19 +78,13 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     // MARK: - filterButton
     
     private func filterButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "menuNavBar"),
-            style: .done,
-            target: self,
-            action: nil)
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.scrollEdgeAppearance = .none
-        navigationController?.navigationBar.isTranslucent = true
+        let filter1 = FilterViewController()
+        navigationController?.pushViewController(filter1, animated: true)
         
-        let filter = FilterViewController()
-        navigationController?.pushViewController(filter, animated: true)
+        print("oi")
+        
     }
     
-    
 }
+
 
