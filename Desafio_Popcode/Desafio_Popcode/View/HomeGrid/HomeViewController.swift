@@ -27,10 +27,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
             layout.minimumLineSpacing = 30
         }
         
-        customHomeView?.filterButton.addAction(UIAction { [weak self] _ in
-            self?.filterButton()
-        }, for: .touchUpInside)
-        
         collectionView?.backgroundColor = UIColor(named: "backgroundColor")
         collectionView?.contentInsetAdjustmentBehavior = .never
         collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier:  cellId)
@@ -42,7 +38,19 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         customHomeView = view as? HomeView
 
     }
-
+    
+    // MARK: - Filter button action
+    
+    @objc func filterButtonAction() {
+        changeToFilterPage()
+    }
+    
+    func changeToFilterPage() {
+        print("hello")
+    }
+    
+    // MARK: - Movie collection view configuration
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
         return header
@@ -72,17 +80,27 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: 205)
+        return CGSize(width: 160, height: 230)
+    }
+ 
+    // MARK: - change to details page
+    
+    @objc func detailsPage() {
+        changeToDetailsPage()
     }
     
-    // MARK: - filterButton
+    func changeToDetailsPage() {
+        print("details")
+    }
     
-    private func filterButton() {
-        let filter1 = FilterViewController()
-        navigationController?.pushViewController(filter1, animated: true)
-        
-        print("oi")
-        
+    // MARK: - make favorite movie
+
+    @objc func favoriteButtonAction() {
+        makeFavoriteMovie()
+    }
+    
+    func makeFavoriteMovie() {
+        print("fav")
     }
     
 }

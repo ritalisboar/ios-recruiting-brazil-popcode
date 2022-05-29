@@ -38,8 +38,10 @@ class HomeView: UICollectionReusableView {
     
     //     MARK: - filterButton
          lazy var filterButton: UIButton = {
-            let filterButton = UIButton()
-            filterButton.setImage(UIImage(named: "menuNavBar"), for: .normal)
+             let filterButton = UIButton(type: .system)
+             filterButton.setImage(UIImage(named: "menuNavBar"), for: .normal)
+             filterButton.tintColor = .white
+             filterButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
              filterButton.tag = 1
             filterButton.translatesAutoresizingMaskIntoConstraints = false
             return filterButton
@@ -51,6 +53,12 @@ class HomeView: UICollectionReusableView {
             filterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
             filterButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         }
+    
+    @objc func buttonAction() {
+        let buttonAction = HomeViewController()
+        buttonAction.filterButtonAction()
+    }
+    
     
     //     MARK: - topTitle
         private lazy var topTitle: UILabel = {

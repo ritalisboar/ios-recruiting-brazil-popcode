@@ -6,5 +6,8 @@ target 'Desafio_Popcode' do
   use_frameworks!
 
   # Pods for Desafio_Popcode
+  pod 'Alamofire', '~> 5.1'
+  pod 'AlamofireImage', '~> 4.1'
+#  pod 'FaveButton'
 
 end

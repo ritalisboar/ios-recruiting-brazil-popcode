@@ -6,18 +6,23 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        clipsToBounds = true
+        layer.cornerRadius = 8
     }
     
-    let movieImg: UIImageView = {
-        let movieImg = UIImageView()
-        movieImg.image = UIImage(named: "splash")
-        movieImg.contentMode = .scaleAspectFit
+    let movieImg: UIButton = {
+        let movieImg = UIButton()
+        movieImg.setImage(UIImage(named: "splash"), for: .normal)
+        movieImg.contentMode = .scaleAspectFill
+        movieImg.addTarget(self, action: #selector(detailsPage), for: .touchUpInside)
+        movieImg.tag = 1
         movieImg.translatesAutoresizingMaskIntoConstraints = false
         return movieImg
     }()
@@ -27,13 +32,17 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieImg.topAnchor.constraint(equalTo: topAnchor).isActive = true
         movieImg.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         movieImg.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
-        movieImg.heightAnchor.constraint(equalToConstant: 170).isActive = true
+    }
+    
+    @objc func detailsPage() {
+        let favButtonAction = HomeViewController()
+        favButtonAction.changeToDetailsPage()
     }
     
     let movieBackground: UIView = {
         let movieBackground = UIView()
         movieBackground.backgroundColor = UIColor(named: "secondColor")
-        movieBackground.alpha = 0.2
+        movieBackground.alpha = 0.3
         movieBackground.layer.cornerRadius = 8
         movieBackground.contentMode = .scaleAspectFill
         movieBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -42,10 +51,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func constraintsMovieBaaackground() {
         movieBackground.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        movieBackground.topAnchor.constraint(equalTo: movieImg.bottomAnchor).isActive = true
+        movieBackground.topAnchor.constraint(equalTo: movieImg.bottomAnchor, constant: -4).isActive = true
         movieBackground.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         movieBackground.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        movieBackground.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        movieBackground.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
     
     // MARK: - MovieTitle
@@ -67,10 +76,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieTitle.centerYAnchor.constraint(equalTo: movieBackground.centerYAnchor).isActive = true
     }
     
-    let movieFavorite: UIImageView = {
-        let movieFavorite = UIImageView()
-        movieFavorite.image = UIImage(systemName: "heart")
+    let movieFavorite: UIButton = {
+        let movieFavorite = UIButton()
+        movieFavorite.setImage(UIImage(systemName: "heart"), for: .normal)
+        movieFavorite.setImage(UIImage(systemName: "heart.fill"), for: .selected)
         movieFavorite.tintColor = UIColor(named: "baseColor")
+        movieFavorite.addTarget(self, action: #selector(favButtonAction), for: .touchUpInside)
+        movieFavorite.tag = 1
         movieFavorite.translatesAutoresizingMaskIntoConstraints = false
         return movieFavorite
     }()
@@ -80,6 +92,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieFavorite.centerYAnchor.constraint(equalTo: movieBackground.centerYAnchor).isActive = true
     }
     
+    @objc func favButtonAction() {
+        let favButtonAction = HomeViewController()
+        favButtonAction.makeFavoriteMovie()
+    }
     
     func setupViews() {
         addSubviews()
