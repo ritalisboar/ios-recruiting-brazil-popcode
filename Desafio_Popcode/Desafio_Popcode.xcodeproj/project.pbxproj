@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16B6C57A64574DEFB80CB140 /* Pods_Desafio_Popcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF127FE631ABA5009A48964 /* Pods_Desafio_Popcode.framework */; };
+		7E27F7AA28445812008ACD25 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E27F7A928445812008ACD25 /* SearchViewController.swift */; };
 		7E4CC01A2818BC8A0050FF09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4CC0192818BC8A0050FF09 /* AppDelegate.swift */; };
 		7E4CC01C2818BC8A0050FF09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4CC01B2818BC8A0050FF09 /* SceneDelegate.swift */; };
 		7E4CC01E2818BC8A0050FF09 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4CC01D2818BC8A0050FF09 /* HomeViewController.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		17297D454296C12CD1C485FF /* Pods-Desafio_Popcode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio_Popcode.debug.xcconfig"; path = "Target Support Files/Pods-Desafio_Popcode/Pods-Desafio_Popcode.debug.xcconfig"; sourceTree = "<group>"; };
+		7E27F7A928445812008ACD25 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7E4CC0162818BC8A0050FF09 /* Desafio_Popcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Desafio_Popcode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E4CC0192818BC8A0050FF09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E4CC01B2818BC8A0050FF09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				7E4CC01D2818BC8A0050FF09 /* HomeViewController.swift */,
 				7E4CC034281AD3930050FF09 /* HomeView.swift */,
 				7E4CC0432820569C0050FF09 /* MovieCollectionViewCell.swift */,
+				7E27F7A928445812008ACD25 /* SearchViewController.swift */,
 				7EF8FB7E28403D6B009A58C3 /* FilterView */,
 			);
 			path = HomeGrid;
@@ -320,6 +323,7 @@
 				7E4CC04C2820BFA50050FF09 /* FavoriteTableViewController.swift in Sources */,
 				7E4CC01E2818BC8A0050FF09 /* HomeViewController.swift in Sources */,
 				7E4CC03E281DAF650050FF09 /* DetailsView.swift in Sources */,
+				7E27F7AA28445812008ACD25 /* SearchViewController.swift in Sources */,
 				7E4CC035281AD3930050FF09 /* HomeView.swift in Sources */,
 				7E4CC040281DAFA80050FF09 /* DetailsViewController.swift in Sources */,
 				7E4CC042282027AC0050FF09 /* TabBarViewController.swift in Sources */,

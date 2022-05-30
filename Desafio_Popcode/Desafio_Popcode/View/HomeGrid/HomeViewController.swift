@@ -8,17 +8,24 @@
 import AlamofireImage
 import UIKit
 
-class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    private var customHomeView: HomeView? = nil
+class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        getMovies.getMovies()
+        
+    }
+    
+    let searchUpdate = UISearchController()
     let cellId = "cellId"
     let headerId = "headerId"
     let padding: CGFloat = 30
     var getMovies = MovieParamsPresenter()
     let movieCVC = MovieCollectionViewCell()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         getMovies.getMovies()
+        searchUpdate.searchResultsUpdater = self
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -31,11 +38,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.contentInsetAdjustmentBehavior = .never
         collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier:  cellId)
         collectionView?.register(HomeView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-    }
-    
-    private func buildView() {
-        view = HomeView()
-        customHomeView = view as? HomeView
     }
     
     // MARK: - Filter button action

@@ -19,7 +19,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let movieImg: UIButton = {
         let movieImg = UIButton()
-        movieImg.setImage(UIImage(named: "splash"), for: .normal)
+        movieImg.setImage(UIImage(systemName: "hourglass.bottomhalf.filled"), for: .normal)
+        movieImg.tintColor = UIColor(named: "baseColor")
         movieImg.contentMode = .scaleAspectFit
         movieImg.addTarget(self, action: #selector(detailsPage), for: .touchUpInside)
         movieImg.tag = 1
@@ -61,7 +62,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let movieTitle: UILabel = {
         let movieTitle = UILabel()
-        movieTitle.text = "[movieName] [movieName] [movieName]"
+        movieTitle.text = "Loading..."
         movieTitle.font = .boldSystemFont(ofSize: 13)
         movieTitle.textColor = UIColor.white
         movieTitle.numberOfLines = 2

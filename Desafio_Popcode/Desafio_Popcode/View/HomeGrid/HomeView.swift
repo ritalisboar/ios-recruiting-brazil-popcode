@@ -101,8 +101,8 @@ class HomeView: UICollectionReusableView {
             let searchBar = UISearchBar()
             searchBar.placeholder = "Busque um filme"
             searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-            searchBar.searchTextField.backgroundColor = UIColor(named: "backgroundColor")
-            searchBar.barTintColor = UIColor(named: "backgroundColor")
+            searchBar.searchTextField.backgroundColor = UIColor(named: "lightPink")
+//            searchBar.barTintColor = UIColor(named: "backgroundColor")
             searchBar.translatesAutoresizingMaskIntoConstraints = false
             return searchBar
         }()

@@ -9,10 +9,34 @@ import UIKit
 
 class DetailsView: UIView {
 
+    
+    //     MARK: - backButton
+         lazy var backButton: UIButton = {
+             let backButton = UIButton(type: .system)
+             backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+             backButton.tintColor = .white
+             backButton.addTarget(self, action: #selector(buttonBack), for: .touchUpInside)
+             backButton.tag = 1
+             backButton.translatesAutoresizingMaskIntoConstraints = false
+            return backButton
+        }()
+
+        private func constraintsBackButton() {
+            backButton.topAnchor.constraint(equalTo: backgroundMovie.topAnchor, constant: 48).isActive = true
+            backButton.leadingAnchor.constraint(equalTo: backgroundMovie.leadingAnchor, constant: 22).isActive = true
+            backButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            backButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+
+    @objc func buttonBack() {
+        let buttonBack = DetailsViewController()
+        buttonBack.backButtonAction()
+    }
+    
     //     MARK: - backgroundTop
         private lazy var backgroundMovie: UIImageView = {
             let backgroundMovie = UIImageView()
-            backgroundMovie.image = UIImage(named: "navBackground")
+            backgroundMovie.image = UIImage(named: "")
             backgroundMovie.contentMode = .scaleAspectFill
             backgroundMovie.translatesAutoresizingMaskIntoConstraints = false
             return backgroundMovie
@@ -41,7 +65,6 @@ class DetailsView: UIView {
             backgroundBody.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             backgroundBody.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
-    
     
     //     MARK: - topTitle
         private lazy var movieTitle: UILabel = {
@@ -150,7 +173,6 @@ class DetailsView: UIView {
     
     // MARK: - movie description
     
-    
     let movieDescription: UILabel = {
         let movieDescription = UILabel()
         movieDescription.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eleifend tempor at egestas diam malesuada donec donec. Vestibulum sed euismod purus magna lectus viverra nunc turpis vitae. Morbi nunc ornare pulvinar placerat. Faucibus eget laoreet morbi euismod egestas tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eleifend tempor at egestas diam malesuada donec donec. Vestibulum sed euismod purus magna lectus viverra nunc turpis vitae. Morbi nunc ornare pulvinar placerat. Faucibus eget laoreet morbi euismod egestas tempor."
@@ -174,6 +196,7 @@ class DetailsView: UIView {
         super.init(frame: frame)
         addSubviews()
         constraintsBackgroundMovie()
+        constraintsBackButton()
         constraintsBackgroundBody()
         constraintsMovieTitle()
         constraintsFavoriteButton()
@@ -189,6 +212,7 @@ class DetailsView: UIView {
     }
 
     private func addSubviews(){
+        addSubview(backButton)
         addSubview(backgroundMovie)
         addSubview(backgroundBody)
         addSubview(movieTitle)
