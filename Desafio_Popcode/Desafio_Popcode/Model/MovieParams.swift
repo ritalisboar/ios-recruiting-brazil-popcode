@@ -17,6 +17,7 @@ struct MovieParams: Codable {
     let release_date: String?
     let title: String?
     let vote_average: Float?
+    var hasFvorited: Bool?
 }
 
 struct RequestParams: Codable {

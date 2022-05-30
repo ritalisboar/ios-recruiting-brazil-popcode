@@ -20,7 +20,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     let movieImg: UIButton = {
         let movieImg = UIButton()
         movieImg.setImage(UIImage(named: "splash"), for: .normal)
-        movieImg.contentMode = .scaleAspectFill
+        movieImg.contentMode = .scaleAspectFit
         movieImg.addTarget(self, action: #selector(detailsPage), for: .touchUpInside)
         movieImg.tag = 1
         movieImg.translatesAutoresizingMaskIntoConstraints = false
@@ -77,10 +77,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     let movieFavorite: UIButton = {
-        let movieFavorite = UIButton()
-        movieFavorite.setImage(UIImage(systemName: "heart"), for: .normal)
-        movieFavorite.setImage(UIImage(systemName: "heart.fill"), for: .selected)
-        movieFavorite.tintColor = UIColor(named: "baseColor")
+        let movieFavorite = UIButton(type: .system)
+        movieFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        movieFavorite.tintColor = UIColor.systemGray3
         movieFavorite.addTarget(self, action: #selector(favButtonAction), for: .touchUpInside)
         movieFavorite.tag = 1
         movieFavorite.translatesAutoresizingMaskIntoConstraints = false
@@ -92,9 +91,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieFavorite.centerYAnchor.constraint(equalTo: movieBackground.centerYAnchor).isActive = true
     }
     
+    var fav: HomeViewController?
     @objc func favButtonAction() {
-        let favButtonAction = HomeViewController()
-        favButtonAction.makeFavoriteMovie()
+        print("fav")
+        fav?.makeFavoriteMovie(cell: self)
     }
     
     func setupViews() {

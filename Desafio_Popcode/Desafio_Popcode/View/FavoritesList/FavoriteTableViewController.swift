@@ -53,10 +53,20 @@ extension FavoriteTableViewController: UITableViewDataSource, UITableViewDelegat
         let cell = favoriteView.dequeueReusableCell(withIdentifier: FavoritesView.identifier, for: indexPath) as! FavoritesView
         let title = getMovies.movies.map({ $0.title })
         let year = getMovies.movies.map({ $0.release_date })
+        let imagePath = getMovies.movies.map({ $0.poster_path })
+        
+        func setupMovie(_ moviePath:String) {
 
+            guard let imageUrl = URL(string: "https://image.tmdb.org/t/p/w185/\(moviePath)") else { return }
+
+            cell.movieImg.af.setImage(withURL: imageUrl)
+        }
+        
         if title.count > 0 {
             cell.movieTitle.text = title[indexPath.row]
             cell.movieYear.text = String(year[indexPath.row]!.prefix(4))
+            setupMovie(imagePath[indexPath.row]!)
+
         }
         return cell
     }

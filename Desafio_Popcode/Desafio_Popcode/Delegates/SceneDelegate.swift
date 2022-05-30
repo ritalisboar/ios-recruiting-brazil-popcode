@@ -18,10 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        
-//        let layout = UICollectionViewFlowLayout()
-//        window?.rootViewController = UINavigationController(rootViewController: HomeViewController(collectionViewLayout: layout))
-        
         window?.rootViewController = TabBarViewController()
     }
 
