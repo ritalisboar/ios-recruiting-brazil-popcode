@@ -77,33 +77,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieTitle.centerYAnchor.constraint(equalTo: movieBackground.centerYAnchor).isActive = true
     }
     
-    let movieFavorite: UIButton = {
-        let movieFavorite = UIButton(type: .system)
-        movieFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        movieFavorite.tintColor = UIColor.systemGray3
-        movieFavorite.addTarget(self, action: #selector(favButtonAction), for: .touchUpInside)
-        movieFavorite.tag = 1
-        movieFavorite.translatesAutoresizingMaskIntoConstraints = false
-        return movieFavorite
-    }()
-    
-    func constraintsMovieFavorite() {
-        movieFavorite.trailingAnchor.constraint(equalTo: movieBackground.trailingAnchor, constant: -10).isActive = true
-        movieFavorite.centerYAnchor.constraint(equalTo: movieBackground.centerYAnchor).isActive = true
-    }
-    
-    var fav: HomeViewController?
-    @objc func favButtonAction() {
-        print("fav")
-        fav?.makeFavoriteMovie(cell: self)
-    }
-    
     func setupViews() {
         addSubviews()
         constraintsMovieImg()
         constraintsMovieBaaackground()
         constraintsMovieTitle()
-        constraintsMovieFavorite()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -113,6 +91,5 @@ class MovieCollectionViewCell: UICollectionViewCell {
         addSubview(movieImg)
         addSubview(movieBackground)
         addSubview(movieTitle)
-        addSubview(movieFavorite)
     }
 }

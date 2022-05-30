@@ -40,6 +40,12 @@ class FavoriteTableViewController: UIViewController {
         favoriteView.frame = view.bounds
     }
     
+    // MARK: - make favorite movie
+
+    func makeFavoriteMovie() {
+        print("fav2")
+    }
+    
 }
 
 // MARK: - extensions
@@ -64,7 +70,7 @@ extension FavoriteTableViewController: UITableViewDataSource, UITableViewDelegat
         
         if title.count > 0 {
             cell.movieTitle.text = title[indexPath.row]
-            cell.movieYear.text = String(year[indexPath.row]!.prefix(4))
+//            cell.movieYear.text = String(year[indexPath.row]!.prefix(4))
             setupMovie(imagePath[indexPath.row]!)
 
         }

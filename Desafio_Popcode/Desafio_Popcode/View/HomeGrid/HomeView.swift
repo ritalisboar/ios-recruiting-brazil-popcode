@@ -16,7 +16,6 @@ class HomeView: UICollectionReusableView {
         constraintsTopTitle()
         constraintsTopText()
         constraintsSearchBar()
-        constraintsFilterButton()
     }
     
     //     MARK: - backgroundTop
@@ -35,30 +34,6 @@ class HomeView: UICollectionReusableView {
             backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             backgroundImage.heightAnchor.constraint(equalToConstant: 289).isActive = true
         }
-    
-    //     MARK: - filterButton
-         lazy var filterButton: UIButton = {
-             let filterButton = UIButton(type: .system)
-             filterButton.setImage(UIImage(named: "menuNavBar"), for: .normal)
-             filterButton.tintColor = .white
-             filterButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-             filterButton.tag = 1
-            filterButton.translatesAutoresizingMaskIntoConstraints = false
-            return filterButton
-        }()
-        
-        private func constraintsFilterButton() {
-            filterButton.topAnchor.constraint(equalTo: topAnchor, constant: 48).isActive = true
-            filterButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22).isActive = true
-            filterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            filterButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        }
-    
-    @objc func buttonAction() {
-        let buttonAction = HomeViewController()
-        buttonAction.filterButtonAction()
-    }
-    
     
     //     MARK: - topTitle
         private lazy var topTitle: UILabel = {
@@ -81,7 +56,7 @@ class HomeView: UICollectionReusableView {
             let topText = UILabel()
             topText.text = """
             Olá,
-            Avalie um filme!
+            Salve um filme!
             """
             topText.textAlignment = .left
             topText.numberOfLines = 2
@@ -97,20 +72,20 @@ class HomeView: UICollectionReusableView {
         }
     
     //     MARK: - searchBar
-        private lazy var searchBar: UISearchBar = {
-            let searchBar = UISearchBar()
-            searchBar.placeholder = "Busque um filme"
-            searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-            searchBar.searchTextField.backgroundColor = UIColor(named: "lightPink")
-//            searchBar.barTintColor = UIColor(named: "backgroundColor")
-            searchBar.translatesAutoresizingMaskIntoConstraints = false
-            return searchBar
+         lazy var searchMovie: UISearchBar = {
+            let searchMovie = UISearchBar()
+            searchMovie.placeholder = "Busque um filme"
+            searchMovie.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+            searchMovie.searchTextField.backgroundColor = UIColor(named: "lightPink")
+            searchMovie.becomeFirstResponder()
+            searchMovie.translatesAutoresizingMaskIntoConstraints = false
+            return searchMovie
         }()
         
         private func constraintsSearchBar() {
-            searchBar.topAnchor.constraint(equalTo: topText.bottomAnchor, constant: 5).isActive = true
-            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13).isActive = true
-            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -13).isActive = true
+            searchMovie.topAnchor.constraint(equalTo: topText.bottomAnchor, constant: 5).isActive = true
+            searchMovie.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13).isActive = true
+            searchMovie.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -13).isActive = true
         }
     
     required init?(coder: NSCoder) {
@@ -121,8 +96,7 @@ class HomeView: UICollectionReusableView {
         addSubview(backgroundImage)
         addSubview(topTitle)
         addSubview(topText)
-        addSubview(searchBar)
-        addSubview(filterButton)
+        addSubview(searchMovie)
     }
 
 }

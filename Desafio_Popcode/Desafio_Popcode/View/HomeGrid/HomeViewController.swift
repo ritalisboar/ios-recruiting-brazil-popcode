@@ -8,24 +8,22 @@
 import AlamofireImage
 import UIKit
 
-class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        getMovies.getMovies()
-        
-    }
+    var movieArray: [MovieParams] = []
+    var filtered: [MovieParams] = []
+    var isSearching: Bool = false
     
-    let searchUpdate = UISearchController()
     let cellId = "cellId"
     let headerId = "headerId"
     let padding: CGFloat = 30
     var getMovies = MovieParamsPresenter()
+    var movieAcount: [MovieParams]?
     let movieCVC = MovieCollectionViewCell()
         
     override func viewDidLoad() {
         super.viewDidLoad()
         getMovies.getMovies()
-        searchUpdate.searchResultsUpdater = self
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -40,16 +38,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.register(HomeView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     }
     
-    // MARK: - Filter button action
-    
-    @objc func filterButtonAction() {
-        changeToFilterPage()
-    }
-    
-    func changeToFilterPage() {
-        print("hello")
-    }
-    
     // MARK: - Movie collection view configuration
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -62,13 +50,14 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let cellsNumber = getMovies.movies.map({ $0.title})
+        if let count = movieAcount?.count {
+            return count
+        }
         return 20
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MovieCollectionViewCell
-        cell.fav = self
         let title = getMovies.movies.map({ $0.title })
         let imagePath = getMovies.movies.map({ $0.poster_path })
 
@@ -83,11 +72,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         return cell
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let details = DetailsViewController()
-//        details.navigationController?.pushViewController(details, animated: true)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 160, height: 190)
@@ -104,15 +88,31 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         let detailsVC = DetailsViewController()
         navigationController?.pushViewController(detailsVC, animated: true)
     }
-    
-    // MARK: - make favorite movie
-
-    func makeFavoriteMovie(cell: UICollectionViewCell) {
-        print("fav2")
-        let indexPathTapped = collectionView.indexPath(for: cell)
-        print(indexPathTapped)
-    }
-    
 }
 
-
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearching = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isSearching = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered.removeAll(keepingCapacity: false)
+        let predicateString = searchBar.text!
+        filtered = movieArray.filter( {$0.title?.range(of: predicateString) != nil})
+        filtered.sort {$0.title! < $1.title!}
+        isSearching = (filtered.count == 0) ? false : true
+        collectionView.reloadData()
+    }
+}

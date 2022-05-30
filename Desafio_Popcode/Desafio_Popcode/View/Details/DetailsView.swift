@@ -88,8 +88,8 @@ class DetailsView: UIView {
     //     MARK: - backgroundTop
         private lazy var favoriteButton: UIImageView = {
             let favoriteButton = UIImageView()
-            favoriteButton.image = UIImage(systemName: "heart")
-            favoriteButton.tintColor = UIColor(named: "baseColor")
+            favoriteButton.image = UIImage(systemName: "heart.fill")
+            favoriteButton.tintColor = UIColor.systemGray3
             favoriteButton.contentMode = .scaleAspectFill
             favoriteButton.translatesAutoresizingMaskIntoConstraints = false
             return favoriteButton

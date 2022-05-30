@@ -21,7 +21,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let viewController = FavoriteTableViewController()
         let favController = UINavigationController(rootViewController: viewController)
         favController.tabBarItem.title = "Favoritos"
-        favController.tabBarItem.image = UIImage(systemName: "heart")
+        favController.tabBarItem.image = UIImage(systemName: "heart.fill")
         
         viewControllers = [homeVC, favController]
         
